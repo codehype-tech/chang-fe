@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+        "vue.volar",
+        "octref.vetur",
+        "esbenp.prettier-vscode",
+        "ionutvmi.path-autocomplete",
+        "ms-vscode.vscode-typescript-next",
+        "eamodio.gitlens",
+        "dbaeumer.vscode-eslint",
+        "mikestead.dotenv",
+        "formulahendry.auto-rename-tag",
+        "formulahendry.auto-complete-tag",
+        "formulahendry.auto-close-tag"
+    ]
+}
