@@ -7,7 +7,7 @@
             <v-icon color="success"></v-icon>
           </template>
 
-          Button
+          Welcome to CODEHYPE CHANG TEAM
 
           <template v-slot:append>
             <v-icon color="warning"></v-icon>
