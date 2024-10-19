@@ -7,7 +7,7 @@
             <v-icon color="success"></v-icon>
           </template>
 
-          Welcome to CODEHYPE CHANG TEAM
+          Welcome to CODEHYPE CHANG TEAM : {{ $t("lang") }}
 
           <template v-slot:append>
             <v-icon color="warning"></v-icon>
