@@ -7,7 +7,9 @@
             <v-icon color="success"></v-icon>
           </template>
 
-          Welcome to CODEHYPE CHANG TEAM : {{ $t("lang") }}
+          Welcome to CODEHYPE CHANG TEAM : {{ $t("lang") }}, {{ appName }}
+          {{ apiBaseUrl }}
+          , {{ secretApiKey }}
 
           <template v-slot:append>
             <v-icon color="warning"></v-icon>
@@ -18,3 +20,10 @@
     </v-app>
   </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+const config = useRuntimeConfig();
+const appName = config.public.appName;
+const apiBaseUrl = config.public.apiBaseUrl;
+const secretApiKey = useSecretKey();
+</script>
