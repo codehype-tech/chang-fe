@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import '@nuxtjs/i18n'
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
@@ -23,5 +22,13 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL,
       appName: process.env.PUBLIC_APP_NAME
     }
+  },
+  vuetify: {
+    vuetifyOptions: {
+      
+    }
+  },
+  build: {
+    transpile: ['vuetify-nuxt-module']
   }
 });

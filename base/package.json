@@ -1,0 +1,27 @@
+{
+  "name": "@jaizen/base",
+  "private": true,
+  "type": "module",
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxtjs/i18n": "^8.5.5",
+    "@pinia/nuxt": "^0.5.5",
+    "nuxt": "^3.13.2",
+    "pinia": "^2.2.4",
+    "vue": "^3.5.12",
+    "vue-router": "latest",
+    "vuetify": "^3.7.3",
+    "vuetify-nuxt-module": "^0.18.3"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.4.47",
+    "@types/node": "^22.7.7",
+    "typescript": "^5.6.3"
+  }
+}
