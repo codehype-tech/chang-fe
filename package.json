@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pre:dev": "pnpm run -r postinstall",
-    "dev": "pnpm run -r dev"
+    "dev": "pnpm run -r dev",
+    "build": "pnpm run -r build",
+    "story:dev": "pnpm -F @jaizen/base story:dev"
   },
   "keywords": [],
   "author": "",

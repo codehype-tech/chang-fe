@@ -7,7 +7,10 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview --port 4567"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^8.5.5",
@@ -20,8 +23,11 @@
     "vuetify-nuxt-module": "^0.18.3"
   },
   "devDependencies": {
+    "@histoire/plugin-nuxt": "^0.17.17",
+    "@histoire/plugin-vue": "^0.17.17",
     "@mdi/font": "^7.4.47",
     "@types/node": "^22.7.7",
+    "histoire": "^0.17.17",
     "typescript": "^5.6.3"
   }
 }
