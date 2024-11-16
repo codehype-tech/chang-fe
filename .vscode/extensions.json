@@ -1,5 +1,8 @@
 {
     "recommendations": [
-        "nuxtr.nuxtr-vscode"
+        "nuxtr.nuxtr-vscode",
+        "vue.volar",
+        "formulahendry.auto-close-tag",
+        "esbenp.prettier-vscode"
     ]
 }
