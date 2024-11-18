@@ -17,12 +17,12 @@ export default defineNuxtConfig({
   vite: {
     server: {
       hmr: {
-        port: 24678
+        port: 24679
       }
     }
   },
   devServer: {
-    port: parseInt(process.env.CUSTOMER_PORT!, 10) || 3020
+    port: parseInt(process.env.TECHNICIAN_PORT!, 10) || 3020
   },
   vuetify: {
     vuetifyOptions: {
