@@ -35,9 +35,7 @@ export default defineNuxtConfig({
     },
   },
   vuetify: {
-    vuetifyOptions: {
-
-    }
+    vuetifyOptions: './vuetify.config.ts'
   },
   build: {
     transpile: ['vuetify-nuxt-module']
