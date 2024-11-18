@@ -136,5 +136,4 @@ erDiagram
       string ownerId "CS, Technician"
     }
 
-
 ```
