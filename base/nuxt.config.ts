@@ -13,6 +13,9 @@ export default defineNuxtConfig({
     defaultLocale: 'th',
     detectBrowserLanguage: false,
   },
+  future: {
+    compatibilityVersion: 4
+  },
   runtimeConfig: {
     // Private variables (only available on server-side)
     // secretApiKey: process.env.SECRET_API_KEY,
