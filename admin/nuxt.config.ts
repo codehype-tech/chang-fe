@@ -21,6 +21,12 @@ export default defineNuxtConfig({
       }
     }
   },
+  future: {
+    compatibilityVersion: 4
+  },
+  pinia: {
+    storesDirs: ['./app/stores/**'],
+  },
   devServer: {
     port: parseInt(process.env.ADMIN_PORT!, 10) || 3010
   },

@@ -16,6 +16,9 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4
   },
+  pinia: {
+    storesDirs: ['./app/stores/**'],
+  },  
   runtimeConfig: {
     // Private variables (only available on server-side)
     // secretApiKey: process.env.SECRET_API_KEY,
