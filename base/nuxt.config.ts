@@ -3,22 +3,27 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', "vuetify-nuxt-module", "@nuxtjs/i18n"],
+  modules: [
+    "@pinia/nuxt",
+    "vuetify-nuxt-module",
+    "@nuxtjs/i18n",
+    "@nuxt/fonts",
+  ],
   i18n: {
     langDir: "assets/locales/",
     locales: [
       { name: "English", code: "en", iso: "en-US", file: "en.json" },
       { name: "ไทย", code: "th", iso: "th-TH", file: "th.json" },
     ],
-    defaultLocale: 'th',
+    defaultLocale: "th",
     detectBrowserLanguage: false,
   },
   future: {
-    compatibilityVersion: 4
+    compatibilityVersion: 4,
   },
   pinia: {
-    storesDirs: ['./app/stores/**'],
-  },  
+    storesDirs: ["./app/stores/**"],
+  },
   runtimeConfig: {
     // Private variables (only available on server-side)
     // secretApiKey: process.env.SECRET_API_KEY,
@@ -30,14 +35,15 @@ export default defineNuxtConfig({
     // }
     runtimeConfig: {
       public: {
-        configFromNuxt: 'test',
+        configFromNuxt: "test",
       },
     },
   },
   vuetify: {
-    vuetifyOptions: './vuetify.config.ts'
+    vuetifyOptions: "./vuetify.config.ts",
   },
   build: {
-    transpile: ['vuetify-nuxt-module']
-  }
+    transpile: ["vuetify-nuxt-module"],
+  },
+  css: ["@/assets/styles/global.scss"],
 });
