@@ -1,20 +1,49 @@
 ```mermaid
 erDiagram
 
-    Admin {
+
+    User ||--|| EnumRole : ""
+    User }|--|{ Project : "Partner"
+    User ||--|| Contact : "Include"
+    User ||--|| Address : "Include"
+    User {
       string _id
       string email
-      string password
-    }
-
-    CS {
-      string _id
+      string passportId
       string firstName
       string lastName
       string phone "NN"
-      string email
-      string password
+      EnumRole role
+      string[] projectIds
+      Contact contact
+      Address address
     }
+
+
+  
+    Contact ||--|{ EnumContactType : ""
+    Contact {
+      string _id
+      string name
+      EnumContactType type
+      string value
+    }
+
+    EnumContactType {
+      string name "PHONE,EMAIL,LINE,ETC.*"
+    }
+
+
+    EnumRole {
+      string name "ADMIN,PARTNER,CS"
+    }
+
+    Address {
+      string subDistrict
+      string district
+      string province
+    }
+
 
     Developer ||--|{ Project : ""
     Developer {
@@ -23,23 +52,15 @@ erDiagram
       string[] projectIds
     }
 
-    Partner }|--|{ Project : ""
-    Partner {
-      string _id
-      string firstName
-      string lastName
-      string phone "NN"
-      string email
-      string password
-      string[] projectIds
-    }
+
 
     Project ||--|{ Unit : ""
     Project ||--|| Project_Type : ""
+    Project ||--|| Address : "Include"
     Project {
       string _id
       string name
-      string address "NN"
+      Address address 
       string[] unitIds
       string[] partnerIds
       Project_Type typeId
@@ -65,30 +86,44 @@ erDiagram
       string[] customerIds
     }
 
+    Customer ||--|| Contact : "Include"
     Customer {
       string _id
       string lineId
       string firstName
       string lastName
       string nickName
-      string phone "NN"
       string idNumber "May not have data"
-      string email
+      Contact contact
       string[] unitIds
     }
 
+    Vendor ||--|| Address : ""
+    Vendor ||--|{ Technician : "technicianIds"
+    Vendor ||--|{ Technician : "contactPersons"
+    Vendor ||--|{ Service_Type : ""
+
+    Vendor {
+      string _id
+      string name
+      Address address
+      Service_Type[] serviceTypeIds
+      Technician[] technicianIds
+      Technician[] contactPersons
+    }
+
     Technician ||--|{ Service_Type : ""
+    Technician ||--|{ Contact : ""
+    Technician ||--|| Address : ""
     Technician {
       string _id
       string name
-      string contactPerson
-      string phone "NN"
-      string email
-      string password
+      Contact[] contact
       string lineId
-      string address "NN"
+      Address address
       string note
-      Service_Type serviceTypeIds
+      Service_Type[] serviceTypeIds
+      
     }
 
 
@@ -97,19 +132,29 @@ erDiagram
       string title
     }
 
+    Assignee ||--|| Vendor : ""
+    Assignee ||--|| Technician : ""
+
+    Assignee {
+      Vendor vendorId
+      Technician[] technicianIds
+    }
+
+    Booking ||--|{ User : "Customer Service"
     Booking ||--|{ Customer : ""
     Booking ||--|{ Technician : ""
-    Booking ||--|{ CS : ""
     Booking ||--|{ Booking_History : "contains"
     Booking ||--|{ Booking_Progress : "contains"
     Booking ||--|| Service_Type : ""
-
+    Booking ||--|| Assignee : "contain"
+    Booking ||--|| Booking_Status : ""
+    
     Booking {
       string _id
       string bookingNo
       Booking_Status status
       Customer customer
-      Technician technician
+      Assignee assignee
       CS customerService
       Booking_History[] history
       Booking_Progress[] progress
