@@ -45,5 +45,17 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify-nuxt-module"],
   },
-  css: ["@/assets/styles/global.scss"],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        sass: {
+          api: 'modern',
+        },
+        scss: {
+          api: 'modern',
+        },
+      },
+    },
+  },
+  css: ["@jaizen/base/app/assets/styles/global.scss"],
 });
