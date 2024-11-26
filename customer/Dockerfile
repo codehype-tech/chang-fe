@@ -11,7 +11,7 @@ COPY  ./package.json   .
 COPY ./pnpm-lock.yaml .
 # COPY ./.npmrc .
 COPY ./pnpm-workspace.yaml .
-COPY ./admin ./admin
+COPY ./customer ./customer
 COPY ./base ./base
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
@@ -21,16 +21,16 @@ WORKDIR /app
 ENV NODE_ENV production
 COPY --from=deps /app ./
 
-RUN pnpm -F @jaizen/admin build
+RUN pnpm -F @jaizen/customer build
 
 FROM base AS deploy
 
 WORKDIR /app
 
-COPY --from=build /app/admin/.output .
+COPY --from=build /app/customer/.output .
 
 ENV NODE_ENV production
-ENV PORT 3010
-EXPOSE 3010
+ENV PORT 3020
+EXPOSE 3020
 
 CMD ["node", "server/index.mjs"]

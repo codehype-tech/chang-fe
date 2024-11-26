@@ -1,0 +1,31 @@
+services:
+  jz-admin:
+    image: docker-registry.codehype.tech/jz-admin:latest
+    platform: linux/amd64
+    env_file: ./.env
+    ports:
+      - 3010:3010
+    build:
+      context: .
+      dockerfile: ./admin/Dockerfile
+    restart: always
+  jz-customer:
+    image: docker-registry.codehype.tech/jz-customer:latest
+    platform: linux/amd64
+    env_file: ./.env
+    ports:
+      - 3020:3020
+    build:
+      context: .
+      dockerfile: ./customer/Dockerfile
+    restart: always
+  jz-technician:
+    image: docker-registry.codehype.tech/jz-technician:latest
+    platform: linux/amd64
+    env_file: ./.env
+    ports:
+      - 3030:3030
+    build:
+      context: .
+      dockerfile: ./technician/Dockerfile
+    restart: always
