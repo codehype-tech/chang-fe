@@ -61,7 +61,6 @@ erDiagram
       string _id
       string name
       Address address 
-      string[] unitIds
       string[] partnerIds
       Project_Type typeId
     }
@@ -77,7 +76,7 @@ erDiagram
     Unit {
       string _id
       string name
-
+      string projectId
       number floor
       number roomNo
       string buildingName
