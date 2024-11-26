@@ -4,7 +4,7 @@ services:
     platform: linux/amd64
     env_file: ./.env
     ports:
-      - 3010:3010
+      - 4010:3010
     build:
       context: .
       dockerfile: ./admin/Dockerfile
@@ -14,7 +14,7 @@ services:
     platform: linux/amd64
     env_file: ./.env
     ports:
-      - 3020:3020
+      - 4020:3020
     build:
       context: .
       dockerfile: ./customer/Dockerfile
@@ -24,7 +24,7 @@ services:
     platform: linux/amd64
     env_file: ./.env
     ports:
-      - 3030:3030
+      - 4030:3030
     build:
       context: .
       dockerfile: ./technician/Dockerfile
