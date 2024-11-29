@@ -88,6 +88,9 @@ const apiBaseUrl = config.public.apiBaseUrl;
 const secretApiKey = useSecretKey();
 const baseStore = useBaseStore();
 
+const apiClient = useApiClient();
+console.log("[technician] config : ", apiClient.baseURL);
+
 // function decrease() {
 //   baseStore.decrement();
 // }
