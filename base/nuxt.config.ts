@@ -28,15 +28,10 @@ export default defineNuxtConfig({
     // Private variables (only available on server-side)
     // secretApiKey: process.env.SECRET_API_KEY,
 
-    // // Public variables (available on client-side via `useRuntimeConfig()`)
-    // public: {
-    //   apiBaseUrl: process.env.API_BASE_URL,
-    //   appName: process.env.PUBLIC_APP_NAME
-    // }
-    runtimeConfig: {
-      public: {
-        configFromNuxt: "test",
-      },
+    // Public variables (available on client-side via `useRuntimeConfig()`)
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL,
+      appName: process.env.PUBLIC_APP_NAME,
     },
   },
   vuetify: {
@@ -49,10 +44,10 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         sass: {
-          api: 'modern',
+          api: "modern",
         },
         scss: {
-          api: 'modern',
+          api: "modern",
         },
       },
     },

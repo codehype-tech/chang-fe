@@ -6,4 +6,8 @@
   </NuxtLayout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+const apiClient = useApiClient();
+console.log("[customer] config : ", apiClient.baseURL);
+</script>
