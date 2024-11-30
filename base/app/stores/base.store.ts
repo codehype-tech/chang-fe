@@ -1,21 +1,18 @@
 // Define the state type
 interface BaseState {
-  count: number;
+  isLoading: boolean;
 }
 
-export const useBaseStore = defineStore("base", {
-  state: (): BaseState => ({
-    count: 0,
-  }),
-  getters: {
-    doubleCount: (state): number => state.count * 2,
-  },
-  actions: {
-    increment() {
-      this.count++;
-    },
-    decrement() {
-      this.count--;
-    },
-  },
+export const useBaseStore = defineStore("base", () => {
+  const baseData = ref<BaseState>({ isLoading: false });
+
+  function doLoading() {
+    baseData.value.isLoading = true;
+  }
+
+  function unLoading() {
+    baseData.value.isLoading = false;
+  }
+
+  return { baseData, doLoading, unLoading };
 });

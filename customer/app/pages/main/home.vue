@@ -1,10 +1,10 @@
 <template>
   <NuxtLayout>
-    REGISTER CONTENT
+    CONTENT
     <template v-slot:bottom>
       <div class="ma-8">
         <VBtn block color="primary">
-          <label for=""> Submit </label>
+          <label for=""> Let’s get started </label>
         </VBtn>
       </div>
     </template>
