@@ -75,6 +75,7 @@ erDiagram
 
     Unit {
       string _id
+      string unitId
       string name
       string projectId
       number floor
