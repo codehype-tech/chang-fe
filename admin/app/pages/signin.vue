@@ -64,7 +64,7 @@ function toggleHidePassword() {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom left, #424bba, #131122);
+  background: linear-gradient(to left, #424bba, #131122);
 }
 
 .signin-form-container {
