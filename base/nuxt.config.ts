@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "vuetify-nuxt-module",
     "@nuxtjs/i18n",
     "@nuxt/fonts",
+    "@nuxt/icon",
   ],
   // i18n: {
   //   langDir: "assets/locales/",

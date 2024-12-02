@@ -1,10 +1,8 @@
 <template>
   <NuxtLayout>
-    <ClientOnly>
-      <v-app>
-        <NuxtPage />
-      </v-app>
-    </ClientOnly>
+    <v-app>
+      <NuxtPage />
+    </v-app>
   </NuxtLayout>
 </template>
 

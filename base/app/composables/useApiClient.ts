@@ -3,12 +3,10 @@ import type { UseFetchOptions } from "#app";
 class ApiClient {
   private static instance: ApiClient;
   baseURL: string;
-  private token: string;
 
   private constructor() {
     const config = useRuntimeConfig();
     this.baseURL = config.public.apiBaseUrl as string;
-    this.token = useCookie("auth_token").value || "";
   }
 
   public static getInstance(): ApiClient {
@@ -18,11 +16,16 @@ class ApiClient {
     return ApiClient.instance;
   }
 
-  public async fetch<T>(endpoint: string, options?: UseFetchOptions<T>) {
-    return useFetch<T>(endpoint, {
+  public async fetch<T>(
+    endpoint: string,
+    options?: UseFetchOptions<T>
+  ): Promise<T> {
+    const token = useCookie("auth_token").value || "";
+
+    return $fetch<T>(endpoint, {
       baseURL: this.baseURL ?? "",
       headers: {
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   }

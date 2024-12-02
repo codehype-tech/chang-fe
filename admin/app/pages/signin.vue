@@ -39,6 +39,7 @@
         size="large"
         text="Login"
         style="color: #404dff"
+        @click="doSignin"
       >
       </v-btn>
 
@@ -51,9 +52,15 @@
 
 <script lang="ts" setup>
 const hidePassword = ref(true);
-
+const token = useCookie("token");
 function toggleHidePassword() {
   hidePassword.value = !hidePassword.value;
+}
+
+function doSignin() {
+  token.value = "it's me";
+  
+  navigateTo("/dashboard", { replace: true });
 }
 </script>
 

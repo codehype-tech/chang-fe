@@ -7,6 +7,7 @@ $black: #000000;
 $error: #de5753;
 $black-50: rgba(0, 0, 0, 0.5);
 $white: white;
+$admin-secondary: #404dff;
 
 @mixin apply-font-styles($color: $black, $size: 14px) {
   font-size: $size;
@@ -29,6 +30,9 @@ $white: white;
   }
 }
 
+@mixin ignore-pointer() {
+  pointer-events: none;
+}
 
 * {
   font-family: "Prompt", sans-serif;
@@ -42,6 +46,11 @@ $white: white;
   @include apply-font-styles($black, 14px);
 }
 
+.l-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 * {
   user-select: none;
   -webkit-user-drag: none;

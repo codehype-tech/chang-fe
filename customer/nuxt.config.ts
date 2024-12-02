@@ -50,7 +50,11 @@ export default defineNuxtConfig({
     port: parseInt(process.env.CUSTOMER_PORT!, 10) || 3020,
   },
   vuetify: {
-    vuetifyOptions: {},
+    vuetifyOptions: {
+      theme: {
+        defaultTheme: "customerTheme",
+      },
+    },
   },
   css: ["@jaizen/base/app/assets/styles/global.scss"],
 });

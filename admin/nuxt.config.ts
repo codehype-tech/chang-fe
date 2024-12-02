@@ -51,6 +51,10 @@ export default defineNuxtConfig({
     port: parseInt(process.env.ADMIN_PORT!, 10) || 3010,
   },
   vuetify: {
-    vuetifyOptions: {},
+    vuetifyOptions: {
+      theme: {
+        defaultTheme: "adminTheme",
+      },
+    },
   },
 });
