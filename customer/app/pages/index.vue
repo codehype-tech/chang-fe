@@ -54,9 +54,9 @@
     </div>
     <template v-slot:bottom>
       <div class="ma-8">
-        <VBtn block color="primary">
+        <v-btn block color="black" size="large">
           <label for=""> Let’s get started </label>
-        </VBtn>
+        </v-btn>
       </div>
     </template>
   </NuxtLayout>
