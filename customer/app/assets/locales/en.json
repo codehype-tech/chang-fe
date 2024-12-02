@@ -1,9 +1,24 @@
 {
   "lang": "en",
+  "btn": {
+    "btn-next": "Next",
+    "btn-submit": "Submit",
+    "btn-resend-code": "Resend Code"
+  },
   "pages": {
     "intro": {
       "title": "Welcome to JAIZEN.COM",
       "desc": "Lorem ipsum dolor sit amet consectetur. Vitae accumsan adipiscing "
+    },
+    "verify-phone-number": {
+      "title": "Verify Phone Number",
+      "desc": " Please enter your Phone Number",
+      "err": "Invalid phone number format. Please try again."
+    },
+    "verify-otp": {
+      "title": "Verification Code",
+      "desc": " Please enter Code send to",
+      "err": "Invalid phone number format. Please try again."
     }
   }
 }
