@@ -77,7 +77,6 @@ function onStepperChange(value: any) {
 </script>
 
 <style lang="scss" scoped>
-@import "@jaizen/base/app/assets/styles/global.scss";
 
 .container {
   display: flex;

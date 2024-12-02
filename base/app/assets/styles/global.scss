@@ -1,15 +1,37 @@
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+
 $primary: yellow;
 $black: #000000;
 $error: #de5753;
 $black-50: rgba(0, 0, 0, 0.5);
-
-* {
-  font-family: "Prompt", sans-serif;
-}
+$white: white;
 
 @mixin apply-font-styles($color: $black, $size: 14px) {
   font-size: $size;
   color: $color;
+}
+
+@mixin respond-to($size) {
+  @if $size == mobile {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  } @else if $size == tablet {
+    @media (max-width: $tablet) {
+      @content;
+    }
+  } @else if $size == desktop {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  }
+}
+
+
+* {
+  font-family: "Prompt", sans-serif;
 }
 
 .fl {

@@ -1,3 +1,12 @@
 {
-    "lang" : "en"
+  "lang": "en",
+  "pages": {
+    "login": {
+      "title": "Please enter your Login and your Password",
+      "login": "Login",
+      "username": "Email or Username",
+      "password": "Password",
+      "forgotPassword": "forgot password?"
+    }
+  }
 }

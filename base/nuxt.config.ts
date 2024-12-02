@@ -47,7 +47,7 @@ export default defineNuxtConfig({
           api: "modern",
         },
         scss: {
-          api: "modern",
+          additionalData: `@use "@jaizen/base/app/assets/styles/global.scss" as *;`, // Use alias for brevity
         },
       },
     },

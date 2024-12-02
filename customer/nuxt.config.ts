@@ -20,6 +20,16 @@ export default defineNuxtConfig({
         port: 24678,
       },
     },
+    css: {
+      preprocessorOptions: {
+        sass: {
+          api: "modern",
+        },
+        scss: {
+          additionalData: `@use "@jaizen/base/app/assets/styles/global.scss" as *;`, // Use alias for brevity
+        },
+      },
+    },
   },
   i18n: {
     langDir: "assets/locales/",
