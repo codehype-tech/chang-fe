@@ -4,6 +4,7 @@
     "vue.volar",
     "formulahendry.auto-close-tag",
     "esbenp.prettier-vscode",
-    "antfu.iconify"
+    "antfu.iconify",
+    "bierner.markdown-mermaid"
   ]
 }
