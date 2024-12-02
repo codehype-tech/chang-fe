@@ -1,11 +1,26 @@
 $primary: yellow;
 $black: #000000;
 $error: #de5753;
+$black-50: rgba(0, 0, 0, 0.5);
 
-label {
+* {
   font-family: "Prompt", sans-serif;
 }
 
-body {
-  font-family: "Prompt", sans-serif;
+@mixin apply-font-styles($color: $black, $size: 14px) {
+  font-size: $size;
+  color: $color;
+}
+
+.fl {
+  @include apply-font-styles($black, 18px);
+}
+
+.fm {
+  @include apply-font-styles($black, 14px);
+}
+
+* {
+  user-select: none;
+  -webkit-user-drag: none;
 }

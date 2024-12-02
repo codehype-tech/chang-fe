@@ -1,3 +1,9 @@
 {
-    "lang" : "en"
+  "lang": "en",
+  "pages": {
+    "intro": {
+      "title": "Welcome to JAIZEN.COM",
+      "desc": "Lorem ipsum dolor sit amet consectetur. Vitae accumsan adipiscing "
+    }
+  }
 }

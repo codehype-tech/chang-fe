@@ -9,15 +9,15 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxt/fonts",
   ],
-  i18n: {
-    langDir: "assets/locales/",
-    locales: [
-      { name: "English", code: "en", iso: "en-US", file: "en.json" },
-      { name: "ไทย", code: "th", iso: "th-TH", file: "th.json" },
-    ],
-    defaultLocale: "th",
-    detectBrowserLanguage: false,
-  },
+  // i18n: {
+  //   langDir: "assets/locales/",
+  //   locales: [
+  //     { name: "English", code: "en", iso: "en-US", file: "en.json" },
+  //     { name: "ไทย", code: "th", iso: "th-TH", file: "th.json" },
+  //   ],
+  //   defaultLocale: "th",
+  //   detectBrowserLanguage: false,
+  // },
   future: {
     compatibilityVersion: 4,
   },
