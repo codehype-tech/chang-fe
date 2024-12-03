@@ -54,7 +54,7 @@
     </div>
     <template v-slot:bottom>
       <div class="ma-8">
-        <v-btn block color="black" size="large">
+        <v-btn block color="black" size="large" @click="onChangePage">
           <label for=""> Let’s get started </label>
         </v-btn>
       </div>
@@ -73,6 +73,9 @@ function onPageViewChange(value: any) {
 
 function onStepperChange(value: any) {
   pageVModel.value = value - 1;
+}
+function onChangePage() {
+  navigateTo("/register/verify-phone-number");
 }
 </script>
 
