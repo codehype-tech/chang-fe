@@ -13,7 +13,7 @@ COPY ./pnpm-lock.yaml .
 COPY ./pnpm-workspace.yaml .
 COPY ./customer ./customer
 COPY ./base ./base
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+RUN  pnpm install 
 
 FROM base AS build
 WORKDIR /app
