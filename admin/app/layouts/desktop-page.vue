@@ -50,7 +50,7 @@
 .desktop-content {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding-inline: 20px;
   gap: 16px;
   height: 100% !important;
 }

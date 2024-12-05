@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-row">
+  <div class="tab-page-layout-container">
     <v-tabs
       v-model="data.tab"
       direction="vertical"
@@ -8,6 +8,7 @@
       align-tabs="center"
       color="white"
       slider-color="#f78166"
+      style="padding-top: 20px"
     >
       <template #tab="{ item }">
         <div
@@ -22,7 +23,7 @@
       </template>
 
       <template #item="{ item }">
-        <v-tabs-window-item :value="item.value" class="pa-4 w-100">
+        <v-tabs-window-item :value="item.value" class="window-item-container">
           <slot :name="`tab-content-${item.value}`"></slot>
         </v-tabs-window-item>
       </template>
@@ -48,6 +49,11 @@ const data = reactive({
 <script lang="ts" setup></script>
 
 <style lang="scss" scoped>
+.tab-page-layout-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
 .tab-active {
   background-color: #eceeff;
   width: 250px;
@@ -72,5 +78,18 @@ const data = reactive({
 
 .v-window {
   width: 100%;
+  height: 100%;
+  background-color: $admin-tab-body-bg;
+}
+
+.v-slide-group {
+  border-right-color: rgba(0, 0, 0, 0.1);
+  padding-right: 16px;
+  border-right-style: solid;
+  border-right-width: thin;
+}
+
+.window-item-container {
+  padding: 44px;
 }
 </style>
