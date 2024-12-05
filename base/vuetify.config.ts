@@ -7,12 +7,17 @@ const adminTheme: ThemeDefinition = {
   dark: false,
   colors: {
     primary: "#131122",
+    "border-secondary": "#D7D9FF",
+    white: "#ffffff",
+    black: "#000000",
   },
 };
 const customerTheme: ThemeDefinition = {
   dark: false,
   colors: {
     primary: "#000000",
+    white: "#ffffff",
+    black: "#000000",
   },
 };
 
@@ -21,12 +26,6 @@ export default defineVuetifyConfiguration({
   theme: {
     defaultTheme: "admin",
     themes: {
-      light: {
-        dark: false,
-        colors: {
-          primary: "#131122", // #E53935
-        },
-      },
       adminTheme,
       customerTheme,
     },

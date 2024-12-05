@@ -1,5 +1,11 @@
 {
   "lang": "en",
+  "$vuetify": {
+    "dataFooter": {
+      "itemsPerPageAll": "All",
+      "pageText": ""
+    }
+  },
   "pages": {
     "login": {
       "title": "Please enter your Login and your Password",

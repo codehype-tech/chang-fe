@@ -32,6 +32,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  components: true,
   i18n: {
     langDir: "assets/locales/",
     locales: [

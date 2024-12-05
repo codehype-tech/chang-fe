@@ -43,9 +43,9 @@
                 }"
                 @click="onDrawerItemClick(item.value)"
               >
-                <!-- <img :src="`/assets/icons/nav/${item.icon}`" /> -->
+                <v-icon :icon="item.icon"> </v-icon>
                 <label
-                  class="l-nav-item-title"
+                  class="l-nav-item-title ignore"
                   :style="{ color: isHovering ? 'black' : undefined }"
                   >{{ item.title }}</label
                 >
@@ -74,20 +74,39 @@
         </div>
       </template>
     </v-navigation-drawer>
+
     <v-main>
+      <nuxt-layout v-if="mdAndUp" name="desktop-page">
+        <template v-if="$slots['title.label']" #title.label
+          ><slot name="title.label"></slot
+        ></template>
+        <template v-if="$slots['title.sub-title']" #title.sub-title
+          ><slot name="title.sub-title"></slot
+        ></template>
+        <template v-if="$slots['title.action']" #title.action
+          ><slot name="title.action"></slot
+        ></template>
+        <template #default> <slot></slot></template>
+        <template v-if="$slots['search-actions']" #search-actions
+          ><slot name="search-actions"></slot
+        ></template>
+      </nuxt-layout>
+
       <div
-        class="d-flex justify-center align-center h-100"
+        v-else
+        class="d-flex justify-center align-center h-100 w-100"
         style="flex-direction: column"
       >
-        <v-app-bar v-if="mdAndUp === false">
+        <v-app-bar>
           <v-app-bar-nav-icon
             variant="text"
             @click.stop="drawer = !drawer"
           ></v-app-bar-nav-icon>
 
-          <v-toolbar-title>Booking Management</v-toolbar-title>
+          <label class="l-page-title">
+            <slot name="title.label"></slot>
+          </label>
         </v-app-bar>
-        <slot></slot>
       </div>
     </v-main>
   </v-layout>
@@ -98,6 +117,10 @@ const drawer = ref(true);
 const token = useCookie("token");
 const { mdAndUp } = useDisplay();
 
+export interface MainPageLayoutProps {
+  isTitleDivider: boolean;
+}
+const props = defineProps<MainPageLayoutProps>();
 watch(mdAndUp, (newVal) => {
   drawer.value = newVal;
 });
@@ -109,7 +132,7 @@ const navItems = ref([
       {
         title: "Dashboard",
         value: "dashboard",
-        icon: "",
+        icon: "mdi-home",
       },
       {
         title: "Developer",
@@ -119,7 +142,7 @@ const navItems = ref([
       {
         title: "Service",
         value: "service",
-        icon: " ",
+        icon: "mdi-chat-info",
       },
     ],
   },
@@ -129,7 +152,7 @@ const navItems = ref([
       {
         title: "Customers",
         value: "customers",
-        icon: " ",
+        icon: "mdi-account-supervisor",
       },
       {
         title: "Service Officers",
@@ -139,7 +162,7 @@ const navItems = ref([
       {
         title: "Admins",
         value: "admins",
-        icon: " ",
+        icon: "mid-shield-account",
       },
     ],
   },
@@ -154,12 +177,12 @@ const navItems = ref([
       {
         title: "Service Types",
         value: "service-types",
-        icon: " ",
+        icon: "mdi-inbox-full",
       },
       {
         title: "System",
         value: "system",
-        icon: " ",
+        icon: "mdi-cogs",
       },
       {
         title: "Activity Logs",
@@ -258,7 +281,6 @@ function doSignout() {
 
 .l-nav-item-title {
   @include apply-font-styles(white, 16px);
-  @include ignore-pointer();
 }
 
 .l-profile-role {
@@ -301,5 +323,9 @@ function doSignout() {
 
 .ic-engineer {
   color: $admin-secondary;
+}
+
+.desktop-title {
+  width: 100%;
 }
 </style>

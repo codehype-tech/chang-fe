@@ -1,5 +1,12 @@
 {
   "lang": "th",
+
+  "$vuetify": {
+    "dataFooter": {
+      "itemsPerPageAll": "ทั้งหมด",
+      "pageText": ""
+    }
+  },
   "pages": {
     "login": {
       "title": "Please enter your Login and your Password",

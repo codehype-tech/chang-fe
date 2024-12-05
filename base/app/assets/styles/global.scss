@@ -8,7 +8,8 @@ $error: #de5753;
 $black-50: rgba(0, 0, 0, 0.5);
 $white: white;
 $admin-secondary: #404dff;
-
+$admin-border-secondary: #d7d9ff;
+$admin-border: #131122;
 @mixin apply-font-styles($color: $black, $size: 14px) {
   font-size: $size;
   color: $color;
@@ -30,10 +31,6 @@ $admin-secondary: #404dff;
   }
 }
 
-@mixin ignore-pointer() {
-  pointer-events: none;
-}
-
 * {
   font-family: "Prompt", sans-serif;
 }
@@ -46,6 +43,10 @@ $admin-secondary: #404dff;
   @include apply-font-styles($black, 14px);
 }
 
+.f-bold {
+  font-weight: bold;
+}
+
 .l-truncate {
   white-space: nowrap;
   overflow: hidden;
@@ -54,4 +55,12 @@ $admin-secondary: #404dff;
 * {
   user-select: none;
   -webkit-user-drag: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.ignore {
+  pointer-events: none;
 }
