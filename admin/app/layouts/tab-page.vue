@@ -16,7 +16,7 @@
             data.tab === item.value ? 'tab-active' : 'tab-inactive',
             'pointer',
             'w-100',
-            'text-center',
+            mdAndUp ? 'text-start' : 'text-center',
           ]"
           @click="data.tab = item.value"
         >

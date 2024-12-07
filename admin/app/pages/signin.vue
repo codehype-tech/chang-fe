@@ -9,7 +9,7 @@
       </label>
 
       <AppTextField
-        class="w-100 mt-11"
+        class="w-100 mt-11 txf"
         :placeholder="$t('pages.login.username')"
         style="color: white"
         :label="$t('pages.login.username')"
@@ -17,9 +17,8 @@
       />
 
       <AppTextField
-        class="w-100"
+        class="w-100 txf"
         :placeholder="$t('pages.login.password')"
-        style="color: #404dff"
         :label="$t('pages.login.password')"
         :type="hidePassword ? 'password' : 'text'"
         is-required
@@ -59,7 +58,7 @@ function toggleHidePassword() {
 
 function doSignin() {
   token.value = "it's me";
-  
+
   navigateTo("/dashboard", { replace: true });
 }
 </script>
@@ -112,5 +111,9 @@ function doSignin() {
   @include respond-to(tablet) {
     width: 100%;
   }
+}
+
+.txf {
+  @include apply-font-styles($white);
 }
 </style>

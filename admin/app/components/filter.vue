@@ -3,14 +3,7 @@
     <v-select
       class="w-100"
       placeholder="Select filter"
-      :items="[
-        'California',
-        'Colorado',
-        'Florida',
-        'Georgia',
-        'Texas',
-        'Wyoming',
-      ]"
+      :items="props.options"
       variant="solo-filled"
       hide-details
       style="flex: 3"
@@ -48,11 +41,19 @@
 </template>
 
 <script lang="ts" setup>
+export interface OptionItem {
+  title: string;
+  value: string;
+}
 const { mdAndUp } = useDisplay();
 
 const emits = defineEmits<{
   (event: "onSearch", value: string): void;
   (event: "onClear"): void;
+}>();
+
+const props = defineProps<{
+  options: Array<OptionItem>;
 }>();
 </script>
 

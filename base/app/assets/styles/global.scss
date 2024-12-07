@@ -11,9 +11,22 @@ $admin-secondary: #404dff;
 $admin-border-secondary: #d7d9ff;
 $admin-tab-body-bg: #e0e1ef4d;
 $admin-border: #131122;
+
 @mixin apply-font-styles($color: $black, $size: 14px) {
   font-size: $size;
   color: $color;
+}
+
+@mixin apply-col-gap($gap: 16px) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin apply-row-gap($gap: 16px) {
+  display: flex;
+  flex-direction: row;
+  gap: $gap;
 }
 
 @mixin respond-to($size) {
