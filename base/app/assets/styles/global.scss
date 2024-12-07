@@ -1,5 +1,5 @@
 $mobile: 480px;
-$tablet: 768px;
+$tablet: 960px;
 $desktop: 1024px;
 
 $primary: yellow;
@@ -32,6 +32,8 @@ $admin-border: #131122;
   }
 }
 
+body {
+}
 * {
   font-family: "Prompt", sans-serif;
 }
@@ -64,4 +66,8 @@ $admin-border: #131122;
 
 .ignore {
   pointer-events: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
 }

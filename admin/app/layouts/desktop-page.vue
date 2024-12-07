@@ -14,8 +14,8 @@
     <v-divider></v-divider>
 
     <div class="desktop-content">
-      <div v-if="$slots['search-actions']" class="search-actions">
-        <slot name="search-actions"></slot>
+      <div v-if="$slots['header-actions']">
+        <slot name="header-actions"></slot>
       </div>
 
       <slot></slot>
@@ -50,7 +50,7 @@
 .desktop-content {
   display: flex;
   flex-direction: column;
-  padding-inline: 20px;
+  padding-left: 20px;
   gap: 16px;
   height: 100% !important;
 }
@@ -67,10 +67,10 @@
   flex-direction: row;
   width: 100%;
   padding: 16px;
-  border-color: $admin-border;
-  border-width: 1px;
-  border-radius: 4px;
-  border-style: solid;
+  // border-color: $admin-border;
+  // border-width: 1px;
+  // border-radius: 4px;
+  // border-style: solid;
   gap: 16px;
 }
 </style>

@@ -2,19 +2,21 @@
   <div class="tab-page-layout-container">
     <v-tabs
       v-model="data.tab"
-      direction="vertical"
+      :direction="mdAndUp ? 'vertical' : 'horizontal'"
       :mobile="true"
       :items="data.tabItems"
       align-tabs="center"
       color="white"
       slider-color="#f78166"
-      style="padding-top: 20px"
+      class="v-tab-container"
     >
       <template #tab="{ item }">
         <div
           :class="[
             data.tab === item.value ? 'tab-active' : 'tab-inactive',
             'pointer',
+            'w-100',
+            'text-center',
           ]"
           @click="data.tab = item.value"
         >
@@ -31,6 +33,7 @@
   </div>
 </template>
 <script setup lang="ts">
+const { mdAndUp } = useDisplay();
 const data = reactive({
   tab: "profile",
   tabItems: [
@@ -46,13 +49,30 @@ const data = reactive({
 });
 </script>
 
-<script lang="ts" setup></script>
-
 <style lang="scss" scoped>
+.v-tab-container {
+  display: flex;
+  height: 100px;
+
+  flex-direction: row;
+
+  @include respond-to(desktop) {
+    height: min-content;
+    max-width: 300px;
+  }
+}
 .tab-page-layout-container {
   display: flex;
   flex-direction: row;
   height: 100%;
+  width: 100%;
+
+  @include respond-to(mobile) {
+    flex-direction: row;
+  }
+  @include respond-to(tablet) {
+    flex-direction: column;
+  }
 }
 .tab-active {
   background-color: #eceeff;
@@ -64,6 +84,7 @@ const data = reactive({
   border-radius: 4px;
   padding-right: 16px;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .tab-inactive {
@@ -74,6 +95,7 @@ const data = reactive({
   padding-top: 14px;
   padding-bottom: 14px;
   padding-right: 16px;
+  font-size: 16px;
 }
 
 .v-window {
@@ -83,13 +105,25 @@ const data = reactive({
 }
 
 .v-slide-group {
+  width: 100%;
   border-right-color: rgba(0, 0, 0, 0.1);
   padding-right: 16px;
   border-right-style: solid;
   border-right-width: thin;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+
+  @include respond-to(mobile) {
+    padding: 16px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px;
+  }
 }
 
 .window-item-container {
   padding: 44px;
+  height: 100%;
 }
 </style>

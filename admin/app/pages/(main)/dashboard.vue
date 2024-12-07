@@ -46,7 +46,9 @@
             </v-btn>
           </div>
         </div>
-        <div class="content-body-container">a</div>
+        <div class="content-body-container">
+          
+        </div>
       </div>
     </template>
   </NuxtLayout>

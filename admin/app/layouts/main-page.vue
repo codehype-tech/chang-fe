@@ -76,38 +76,26 @@
     </v-navigation-drawer>
 
     <v-main>
-      <nuxt-layout v-if="mdAndUp" name="desktop-page">
-        <template v-if="$slots['title.label']" #title.label
-          ><slot name="title.label"></slot
-        ></template>
-        <template v-if="$slots['title.sub-title']" #title.sub-title
-          ><slot name="title.sub-title"></slot
-        ></template>
-        <template v-if="$slots['title.action']" #title.action
-          ><slot name="title.action"></slot
-        ></template>
-        <template #default> <slot></slot></template>
-        <template v-if="$slots['search-actions']" #search-actions
-          ><slot name="search-actions"></slot
-        ></template>
-      </nuxt-layout>
-
-      <div
-        v-else
-        class="d-flex justify-center align-center h-100 w-100"
-        style="flex-direction: column"
+      <nuxt-layout
+        :name="mdAndUp ? 'desktop-page' : 'mobile-page'"
+        @drawerClick="onDrawerClick()"
       >
-        <v-app-bar>
-          <v-app-bar-nav-icon
-            variant="text"
-            @click.stop="drawer = !drawer"
-          ></v-app-bar-nav-icon>
-
-          <label class="l-page-title">
-            <slot name="title.label"></slot>
-          </label>
-        </v-app-bar>
-      </div>
+        <template v-if="$slots['title.label']" #title.label>
+          <slot name="title.label"></slot>
+        </template>
+        <template v-if="$slots['title.sub-title']" #title.sub-title>
+          <slot name="title.sub-title"></slot>
+        </template>
+        <template v-if="$slots['title.action']" #title.action>
+          <slot name="title.action"></slot>
+        </template>
+        <template #default>
+          <slot></slot>
+        </template>
+        <template v-if="$slots['header-actions']" #header-actions>
+          <slot name="header-actions"> </slot>
+        </template>
+      </nuxt-layout>
     </v-main>
   </v-layout>
 </template>
@@ -125,6 +113,9 @@ watch(mdAndUp, (newVal) => {
   drawer.value = newVal;
 });
 
+function onDrawerClick() {
+  drawer.value = !drawer.value;
+}
 const navItems = ref([
   {
     title: "",

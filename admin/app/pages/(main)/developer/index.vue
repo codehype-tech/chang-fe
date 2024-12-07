@@ -17,41 +17,8 @@
       </v-btn>
     </template>
 
-    <template #search-actions>
-      <v-select
-        label="Select filter"
-        :items="[
-          'California',
-          'Colorado',
-          'Florida',
-          'Georgia',
-          'Texas',
-          'Wyoming',
-        ]"
-        variant="solo-filled"
-        hide-details
-      ></v-select>
-
-      <v-text-field
-        variant="outlined"
-        hide-details
-        placeholder="Search..."
-        class="search-txf"
-        color="border-secondary"
-      ></v-text-field>
-
-      <v-btn
-        text="Search"
-        color="primary"
-        class="sarch-action-btn text-none"
-        prepend-icon="mdi-magnify"
-      ></v-btn>
-      <v-btn
-        text="Clear Filter"
-        variant="outlined"
-        class="sarch-action-btn text-none"
-        prepend-icon="mdi-cached"
-      ></v-btn>
+    <template #header-actions>
+      <Filter></Filter>
     </template>
 
     <template #default>
@@ -643,23 +610,14 @@ const resizableDiv = ref();
 const tableData = reactive({
   tableHeight: 0,
 });
+
+const { mdAndUp } = useDisplay();
 function onResize() {
   tableData.tableHeight =
-    window.innerHeight - resizableDiv.value.getBoundingClientRect().y - 80;
+    window.innerHeight -
+    resizableDiv.value.getBoundingClientRect().y -
+    (mdAndUp.value ? 60 : 160);
 }
 </script>
 
-<style lang="scss" scoped>
-.v-btn {
-  height: 100% !important;
-}
-
-.search-txf {
-  border-color: $admin-border-secondary;
-  flex-grow: 4;
-}
-
-.sarch-action-btn {
-  font-weight: 500;
-}
-</style>
+<style lang="scss" scoped></style>
