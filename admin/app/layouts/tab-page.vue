@@ -4,7 +4,7 @@
       v-model="data.tab"
       :direction="mdAndUp ? 'vertical' : 'horizontal'"
       :mobile="true"
-      :items="data.tabItems"
+      :items="props.items"
       align-tabs="center"
       color="white"
       slider-color="#f78166"
@@ -34,18 +34,11 @@
 </template>
 <script setup lang="ts">
 const { mdAndUp } = useDisplay();
+const props = defineProps<{
+  items: Array<{ text: string; value: string }>;
+}>();
 const data = reactive({
   tab: "profile",
-  tabItems: [
-    {
-      text: "Profile",
-      value: "profile",
-    },
-    {
-      text: "Project",
-      value: "project",
-    },
-  ] as Array<{ text: string; value: string }>,
 });
 </script>
 

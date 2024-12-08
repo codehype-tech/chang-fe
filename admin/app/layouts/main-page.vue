@@ -128,7 +128,7 @@ const navItems = ref([
       {
         title: "Developer",
         value: "developer",
-        icon: " ",
+        icon: "mdi-domain",
       },
       {
         title: "Service",

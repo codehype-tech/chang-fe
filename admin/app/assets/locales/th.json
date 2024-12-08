@@ -18,7 +18,13 @@
     "developer": {
       "profile": "Profile",
       "project": "Project",
-      "name": "Name"
+      "name": "Name",
+      "type": "Type",
+      "zipCode": "Zip Code",
+      "province": "Province",
+      "district": "District",
+      "subDistrict": "Sub-District",
+      "address": "Address"
     }
   }
 }
