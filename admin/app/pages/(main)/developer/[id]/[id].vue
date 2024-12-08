@@ -337,18 +337,18 @@ function onResize() {
     (mdAndUp.value ? 110 : 160);
 }
 
-const items = ref([
-  {
-    title: "Developer",
-    disabled: false,
-    to: "/developer",
-  },
-  {
-    title: pageName.value,
-    disabled: false,
-    to: `/developer/${route.params.id}`,
-  },
-]);
+const items = computed(() =>
+  route.path
+    .split("/")
+    .filter((e) => e)
+    .map((e) => {
+      return {
+        title: e,
+        disabled: false,
+        to: "/developer",
+      };
+    })
+);
 </script>
 
 <style lang="scss" scoped>
