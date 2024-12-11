@@ -7,6 +7,7 @@
 
     <template #title.action>
       <v-btn
+      @click="isDialogVisible = true"
         color="primary"
         style="color: white"
         base-color="primary"
@@ -59,11 +60,20 @@
           </template>
         </AppTable>
       </div>
+      <DialogCustom v-model="isDialogVisible" :title="'Add Developer'" @submit="handleDialogSubmit" :loading="isLoading"  :onClose="handleDialogClose">
+            <template #body>
+              <div>
+                <label for="">Name <span class="text-red">*</span></label>
+                <v-text-field v-model="dialogInputs.name.value" label="Name"></v-text-field>
+              </div>
+            </template>
+          </DialogCustom>
     </template>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
+import DialogCustom from "~/utils/dialogCustom.vue";
 useHead({ title: "Developer" });
 
 const headers = [
@@ -542,6 +552,29 @@ function onResize() {
     window.innerHeight -
     resizableDiv.value.getBoundingClientRect().y -
     (mdAndUp.value ? 60 : 160);
+}
+const isDialogVisible = ref(false);
+const isLoading = ref(false);
+const dialogInputs = ref({
+  name: {
+    value: "",
+    errMessage: "",
+    isValid: true,
+  }
+})
+
+const handleDialogClose = () => {
+  console.log('Dialog closed');
+  dialogInputs.value.name.value = ''
+};
+const handleDialogSubmit = () => {
+  console.log('Submitted Data:', dialogInputs.value)
+  isLoading.value = true
+  setTimeout(() => {
+    isLoading.value = false
+    isDialogVisible.value = false
+    dialogInputs.value.name.value = ''
+  },1000)
 }
 </script>
 
