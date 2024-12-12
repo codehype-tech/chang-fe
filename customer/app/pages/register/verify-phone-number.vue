@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <div class="container">
-      <div>
+      <div class="pt-5 img">
         <v-img :width="250" :height="248" cover src="@/assets/images/rafiki.svg"></v-img>
       </div>
       <div class="pt-4 information">
@@ -15,7 +15,7 @@
         <div class="d-flex align-center">
           <p class=" pe-2">66+</p>
           <v-form class="w-100">
-            <v-text-field :rules="phoneRules" v-model="phoneNumber" maxlength="10" label="Enter Phone Number"
+            <v-text-field :rules="phoneRules"  v-model="phoneNumber" maxlength="10" label="Enter Phone Number"
               placeholder="Enter Phone Number"></v-text-field>
           </v-form>
 
@@ -26,7 +26,7 @@
     <template v-slot:bottom>
       <div class="ma-8">
         <VBtn :disabled="!isValid" block color="black" size="large" @click="onNext">
-          <label for=""class="text-none" > {{ $t("btn.btn-next") }} </label>
+          <label for="" class="text-none"> {{ $t("btn.btn-next") }} </label>
         </VBtn>
       </div>
     </template>
@@ -42,26 +42,27 @@ import { usePhoneStore } from '@/stores/phone.store';
 const { t } = useI18n();
 const phoneNumber = ref("");
 const isValid = ref(false);
-
+const messageErr = t("pages.verify-phone-number.err");
 const phoneRules = [
-  (v: any) => !!v.trim() || t("pages.verify-phone-number.err"),
-  (v: string) => /^[0-9]+$/.test(v.trim()) || t("pages.verify-phone-number.err"),
-  (v: string ) => v.trim().length === 10 || t("pages.verify-phone-number.err"),
+  (v: any) => !!v.trim() || messageErr,
+  (v: string) => /^[0-9]+$/.test(v.trim()) || messageErr,
+  (v: string) => v.trim().length >= 9 && v.trim().length <= 10 || messageErr,
 ];
-const eventEnum = {
-  0: "Next",
-  1: "Submit"
-}
-const events = 0;
 const validatePhoneNumber = () => {
-  isValid.value = phoneNumber.value.trim().length === 10;
+  const checkRules =  phoneRules.every(rule => {
+    
+    if( typeof rule(phoneNumber.value) === 'string'){
+      return false
+    }else{
+      return true
+    }
+  });
+  isValid.value = checkRules
 };
 watch(phoneNumber, validatePhoneNumber);
 
 function onNext() {
-  // navigateTo("/register/verify-otp");
   const phoneStore = usePhoneStore();
-
   phoneStore.setPhoneNumber(phoneNumber.value);
   navigateTo("/register/verify-otp");
 
@@ -74,14 +75,14 @@ function onNext() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20%;
-  // justify-content: center;
-  // padding-top: 100px;
   padding: 30px !important;
   padding-inline: 48px;
   height: 100%;
-
+.img{
+  height: 40%;
+}
   .information {
+    height: 30%;
     .t-label {
       padding: 10px;
       width: 100%;
@@ -96,6 +97,7 @@ function onNext() {
   }
 
   .t-phone {
+    height: 30%;
     width: 100%;
     margin-top: 50px;
 
