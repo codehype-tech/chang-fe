@@ -1,0 +1,15 @@
+/**/*/.env
+/**/*/.env.*
+/**/*/README.md
+/**/*/.git
+/**/*/.gitignore
+/**/*/npm-debug.log
+/**/*/.dockerignore
+/**/*/Dockerfile
+
+# Directories
+node_modules
+.output
+.nuxt
+.git
+docs
