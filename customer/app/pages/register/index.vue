@@ -1,10 +1,5 @@
 <template>
-  <NuxtLayout>
-
-   
-  </NuxtLayout>
+  <NuxtLayout> </NuxtLayout>
 </template>
 
-<script lang="ts" setup>
-  
-</script>
+<script lang="ts" setup></script>

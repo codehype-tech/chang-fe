@@ -1,6 +1,10 @@
 <template>
   <div class="signin-container">
-    <div class="signin-form-container">
+    <v-form
+      class="signin-form-container"
+      v-model="valid"
+      @submit.prevent="doSignin"
+    >
       <v-img src="@/assets/images/logo.svg" class="img-logo" :height="56">
       </v-img>
       <label for="" class="f-login mt-11">{{ $t("pages.login.login") }}</label>
@@ -34,32 +38,42 @@
 
       <v-btn
         block
+        :loading="isLoading"
         class="mt-11 text-none"
         size="large"
         text="Login"
+        type="submit"
         style="color: #404dff"
-        @click="doSignin"
       >
       </v-btn>
 
       <label for="" class="l-forgot-pass mt-4">{{
         $t("pages.login.forgotPassword")
       }}</label>
-    </div>
+    </v-form>
   </div>
 </template>
 
 <script lang="ts" setup>
 const hidePassword = ref(true);
 const token = useCookie("token");
+const isLoading = ref(false);
+const valid = ref(false);
+
 function toggleHidePassword() {
   hidePassword.value = !hidePassword.value;
 }
 
 function doSignin() {
-  token.value = "it's me";
+  if (valid.value) {
+    isLoading.value = true;
 
-  navigateTo("/dashboard", { replace: true });
+    setTimeout(() => {
+      token.value = "it's me";
+      navigateTo("/dashboard", { replace: true });
+      isLoading.value = false;
+    }, 1500);
+  }
 }
 </script>
 

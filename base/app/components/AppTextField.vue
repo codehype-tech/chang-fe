@@ -11,6 +11,7 @@
       v-bind:class="$attrs.color"
       v-bind:placeholder="placeHolderCompute"
       v-bind:type="typeCompute"
+      :rules="fieldRules"
     >
       <template #append-inner>
         <slot name="append-inner"></slot>
@@ -20,13 +21,18 @@
 </template>
 
 <script setup lang="ts">
+import { useValidate } from "~/composables/useValidate";
+
 const props = defineProps<{ isRequired?: boolean }>();
 const attrs = useAttrs();
 const placeHolderCompute: ComputedRef<string> = computed(
   () => attrs.placeholder as string
 );
 
+const { useRequired } = useValidate();
 const typeCompute: ComputedRef<string> = computed(() => attrs.type as string);
+
+const fieldRules = computed(() => [useRequired]);
 </script>
 
 <style lang="scss">

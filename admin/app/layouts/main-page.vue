@@ -91,6 +91,19 @@
         </template>
         <template #default>
           <slot></slot>
+
+          <v-snackbar
+            v-model="baseSnackData.isShowSnack"
+            variant="elevated"
+            :color="baseSnackData.type"
+            :location="mdAndUp ? 'top right' : 'bottom center'"
+            close-on-content-click
+          >
+            <div style="display: flex; flex-direction: row">
+              <v-icon>mdi-check-cicle</v-icon>
+              {{ baseSnackData.snackMessage }}
+            </div>
+          </v-snackbar>
         </template>
         <template v-if="$slots['header-actions']" #header-actions>
           <slot name="header-actions"> </slot>
@@ -101,10 +114,12 @@
 </template>
 
 <script lang="ts" setup>
+import { useBaseStore } from "@jaizen/base/app/stores/base.store";
+
 const drawer = ref(true);
 const token = useCookie("token");
 const { mdAndUp } = useDisplay();
-
+const { baseSnackData } = useBaseStore();
 export interface MainPageLayoutProps {
   isTitleDivider: boolean;
 }

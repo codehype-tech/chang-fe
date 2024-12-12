@@ -4,7 +4,19 @@ interface BaseState {
 }
 
 export const useBaseStore = defineStore("base", () => {
-  const baseData = ref<BaseState>({ isLoading: false });
+  const baseData = ref<BaseState>({
+    isLoading: false,
+  });
+
+  const baseSnackData = reactive<{
+    isShowSnack: boolean;
+    snackMessage: string;
+    type: "error" | "success" | undefined;
+  }>({
+    isShowSnack: false,
+    snackMessage: "",
+    type: undefined,
+  });
 
   function doLoading() {
     baseData.value.isLoading = true;
@@ -14,5 +26,27 @@ export const useBaseStore = defineStore("base", () => {
     baseData.value.isLoading = false;
   }
 
-  return { baseData, doLoading, unLoading };
+  function doShowSnack(
+    message: string,
+    options?: { type: "error" | "success" | undefined }
+  ) {
+    baseSnackData.snackMessage = message;
+    baseSnackData.type = options?.type;
+    baseSnackData.isShowSnack = true;
+  }
+
+  function doHideSnack() {
+    baseSnackData.snackMessage = "";
+    baseSnackData.type = undefined;
+    baseSnackData.isShowSnack = false;
+  }
+
+  return {
+    baseData,
+    baseSnackData,
+    doLoading,
+    unLoading,
+    doShowSnack,
+    doHideSnack,
+  };
 });

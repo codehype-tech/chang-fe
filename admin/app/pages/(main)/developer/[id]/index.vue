@@ -28,26 +28,34 @@
     <template #default>
       <nuxt-layout name="tab-page" :items="projectTabItems">
         <template #tab-content-profile>
-          <nuxt-layout name="tab-page-item">
-            <template #title>{{ $t("pages.developer.profile") }}</template>
-            <template #actions>
-              <v-btn
-                prepend-icon="mdi-content-save"
-                color="primary"
-                text="Save"
-              ></v-btn>
-            </template>
-            <template #default>
-              <div class="tab-content-project-container mt-11">
-                <AppTextField
-                  class="w-100 txf"
-                  :placeholder="$t('pages.developer.name')"
-                  :label="$t('pages.developer.name')"
-                  is-required
-                />
-              </div>
-            </template>
-          </nuxt-layout>
+          <v-form
+            class="signin-form-container"
+            v-model="profileData.formValid"
+            @submit.prevent="doSaveProfile"
+          >
+            <nuxt-layout name="tab-page-item">
+              <template #title>{{ $t("pages.developer.profile") }}</template>
+              <template #actions>
+                <v-btn
+                  prepend-icon="mdi-content-save"
+                  color="primary"
+                  text="Save"
+                  type="submit"
+                  :loading="profileData.isLoading"
+                ></v-btn>
+              </template>
+              <template #default>
+                <div class="tab-content-project-container mt-11">
+                  <AppTextField
+                    class="w-100 txf"
+                    :placeholder="$t('pages.developer.name')"
+                    :label="$t('pages.developer.name')"
+                    is-required
+                  />
+                </div>
+              </template>
+            </nuxt-layout>
+          </v-form>
         </template>
         <template #tab-content-project>
           <nuxt-layout name="tab-page-item">
@@ -110,8 +118,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useBaseStore } from "@jaizen/base/app/stores/base.store";
+
 useHead({ title: "Developer" });
 
+const { doShowSnack, doHideSnack } = useBaseStore();
 const projectTabItems = [
   {
     text: "Profile",
@@ -447,6 +458,10 @@ const projectItems = [
   },
 ];
 
+const profileData = reactive({
+  formValid: false,
+  isLoading: false,
+});
 const route = useRoute();
 const pageName = computed(() => route.params.id?.toString() ?? "");
 
@@ -463,6 +478,16 @@ function onResize() {
     (mdAndUp.value ? 110 : 160);
 }
 
+function doSaveProfile() {
+  if (profileData.formValid) {
+    profileData.isLoading = true;
+
+    setTimeout(() => {
+      profileData.isLoading = false;
+      doShowSnack("Do save profile failure.", { type: "success" });
+    }, 1500);
+  }
+}
 const items = ref([
   {
     title: "Developer",
