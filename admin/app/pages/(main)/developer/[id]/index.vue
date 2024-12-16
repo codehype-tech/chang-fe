@@ -20,30 +20,17 @@
     <template #default>
       <nuxt-layout name="tab-page" :items="projectTabItems">
         <template #tab-content-profile>
-          <v-form
-            class="signin-form-container"
-            v-model="profileData.formValid"
-            @submit.prevent="doSaveProfile"
-          >
+          <v-form class="signin-form-container" v-model="profileData.formValid" @submit.prevent="doSaveProfile">
             <nuxt-layout name="tab-page-item">
               <template #title>{{ $t("pages.developer.profile") }}</template>
               <template #actions>
-                <v-btn
-                  prepend-icon="mdi-content-save"
-                  color="primary"
-                  text="Save"
-                  type="submit"
-                  :loading="profileData.isLoading"
-                ></v-btn>
+                <v-btn prepend-icon="mdi-content-save" color="primary" text="Save" type="submit"
+                  :loading="profileData.isLoading"></v-btn>
               </template>
               <template #default>
                 <div class="tab-content-project-container mt-11">
-                  <AppTextField
-                    class="w-100 txf"
-                    :placeholder="$t('pages.developer.name')"
-                    :label="$t('pages.developer.name')"
-                    is-required
-                  />
+                  <AppTextField class="w-100 txf" :placeholder="$t('pages.developer.name')"
+                    :label="$t('pages.developer.name')" is-required />
                 </div>
               </template>
             </nuxt-layout>
@@ -76,26 +63,26 @@
                 <template #body>
                   <v-form ref="form" v-model="valid">
                     <label for="">Name Project<span class="text-red">*</span></label>
-                    <v-text-field :rules="[rules.required]" v-model="formData.nameProject"
-                      label="Name"></v-text-field>
+                    <v-text-field :error-messages="errorMessages.nameProject" :rules="[rules.required]" v-model="formData.nameProject" label="Name"></v-text-field>
 
                     <label for="">Type<span class="text-red">*</span></label>
-                    <v-select label="Type" v-model="formData.type"></v-select>
+                    <v-select :error-messages="errorMessages.type" label="Type" v-model="formData.type"></v-select>
 
                     <label for="">Zip Code <span class="text-red">*</span></label>
-                    <v-text-field :rules="[rules.required, rules.zipCode]"  label="Zip Code" v-model="formData.zipCode"></v-text-field>
+                    <v-text-field :error-messages="errorMessages.zipCode" :rules="[rules.required]" label="Zip Code"
+                      v-model="formData.zipCode"></v-text-field>
 
                     <label for="">Province <span class="text-red">*</span></label>
-                    <v-select label="Province" v-model="formData.province"></v-select>
+                    <v-select :error-messages="errorMessages.province" label="Province" :rules="[rules.required]" v-model="formData.province"></v-select>
 
                     <label for="">District <span class="text-red">*</span></label>
-                    <v-select label="District" v-model="formData.district"></v-select>
+                    <v-select :error-messages="errorMessages.district" label="District" :rules="[rules.required]" v-model="formData.district"></v-select>
 
                     <label for="">Sub-District <span class="text-red">*</span></label>
-                    <v-select label="Sub-District" v-model="formData.subDistrict"></v-select>
+                    <v-select :error-messages="errorMessages.subDistrict" label="Sub-District" :rules="[rules.required]" v-model="formData.subDistrict"></v-select>
 
                     <label for="">Address <span class="text-red">*</span></label>
-                    <v-textarea label="Address" v-model="formData.address"></v-textarea>
+                    <v-textarea :error-messages="errorMessages.address" label="Address" :rules="[rules.required]" v-model="formData.address"></v-textarea>
                   </v-form>
 
                 </template>
@@ -138,6 +125,7 @@
 
 <script lang="ts" setup>
 import { useBaseStore } from "@jaizen/base/app/stores/base.store";
+import { error } from "console";
 
 import DialogCustom from '~/utils/dialogCustom.vue';
 useHead({ title: "Developer" });
@@ -533,14 +521,35 @@ const formDefault = {
   address: "",
 }
 const formData = ref(JSON.parse(JSON.stringify(formDefault)));
+// const formData = ref({ ...formDefault });
+const errorMessages = ref(JSON.parse(JSON.stringify(formDefault)));
+const rules = {
+
+required: (value: any) => !!value || "is required",
+// zipCode: (value: any) =>
+//   /^\d+$/.test(value) || 'รหัสไปรษณีย์ต้องเป็นตัวเลขเท่านั้น',
+}
 const clearFormData = () => {
   formData.value = formDefault;
+  // formData.value = { ...formDefault };
+  errorMessages.value = { ...formDefault };
 }
-const rules = {
-  required: (value: any) => !!value || "is required",
-  zipCode: (value: any) =>
-    /^\d+$/.test(value) || 'รหัสไปรษณีย์ต้องเป็นตัวเลขเท่านั้น',
+
+const validateField = (fieldName: string, value: any) => {
+  const ruleResult = rules.required(value);
+  return typeof ruleResult === "string" ? ruleResult : "";
+
 }
+
+const validateForm = () => {
+  let isValid = true;
+  Object.keys(formData.value).forEach((field) => {
+    const error = validateField(field, formData.value[field]);
+    errorMessages.value[field] = error;
+    if (error) isValid = false;
+  });
+  return isValid;
+};
 const handleDialogClose = () => {
   console.log('Dialog closed');
   clearFormData();
@@ -548,11 +557,21 @@ const handleDialogClose = () => {
 const handleDialogSubmit = () => {
   console.log('Submitted Data:', formData.value)
   isLoading.value = true
-  setTimeout(() => {
-    isLoading.value = false
-    isDialogVisible.value = false
+  
+  if (validateForm()) {
+    alert("ส่งข้อมูลสำเร็จ!");
     clearFormData();
-  }, 1000)
+  } else {
+    isLoading.value = false;
+  }
+  // if (!valid.value) {
+  //   setTimeout(() => {
+  //     isLoading.value = false
+  //     isDialogVisible.value = false
+  //     clearFormData();
+  //   }, 1000)
+  // }
+
 }
 </script>
 
