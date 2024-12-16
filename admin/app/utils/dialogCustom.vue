@@ -9,31 +9,34 @@
                 <slot name="body"></slot>
             </div>
             <div class="dialog-footer">
-                <v-btn color="primary" style="color: white" base-color="primary" class="text-none w-100" :loading="props.loading"
-                :disabled="props.loading"
-                    @click="submitDialog">{{ props.textBtn ?? 'Submit' }}</v-btn>
+                <v-btn color="primary" style="color: white" base-color="primary" class="text-none w-100"
+                    :loading="props.loading" :disabled="props.loading" @click="submitDialog">{{ props.textBtn ??
+                    'Submit' }}</v-btn>
             </div>
         </v-card>
     </v-dialog>
 </template>
 
 <style lang="scss" scoped>
-.dialog-container {
-}
+
+.dialog-container {}
 
 .dialog-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 16px;
- 
     padding: 16px;
 
+
 }
+
 .dialog-body {
     padding: 16px;
     padding-bottom: 0px;
     border-bottom: 1px solid #e0e0e0;
+    overflow-y: auto;
+
 }
 
 .dialog-footer {
