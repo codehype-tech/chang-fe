@@ -18,7 +18,7 @@
             'w-100',
             mdAndUp ? 'text-start' : 'text-center',
           ]"
-          @click="data.tab = item.value"
+          @click="updateHash(item.value)"
         >
           <label for="" class="pointer">{{ item.text }}</label>
         </div>
@@ -34,6 +34,23 @@
 </template>
 <script setup lang="ts">
 const { mdAndUp } = useDisplay();
+
+const router = useRouter();
+const route = useRoute();
+
+onMounted(() => {
+  nextTick(() => {
+    const initialHash = route.hash.replace("#", "");
+    if (initialHash) data.tab = initialHash;
+  });
+});
+
+function updateHash(value: any) {
+  data.tab = value;
+  console.log("updateHash ", value);
+  router.push({ hash: `#${value}` });
+}
+
 const props = defineProps<{
   items: Array<{ text: string; value: string }>;
 }>();

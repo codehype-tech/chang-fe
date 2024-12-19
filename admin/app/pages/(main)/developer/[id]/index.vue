@@ -1,26 +1,18 @@
 <template>
   <NuxtLayout name="main-page">
     <template #title.label>
-      <v-breadcrumbs
-        :items="items"
-        divider=">"
-        style="font-size: 16px; padding: 0px"
-      >
+      <v-breadcrumbs :items="items" divider=">" style="font-size: 16px; padding: 0px">
         <template v-slot:title="{ item, index }">
-          <label
-            :style="{
-              fontWeight: index == items.length - 1 ? 'bold' : 400,
-              color:
-                index == items.length - 1
-                  ? '#404DFF'
-                  : mdAndUp
+          <label :style="{
+            fontWeight: index == items.length - 1 ? 'bold' : 400,
+            color:
+              index == items.length - 1
+                ? '#404DFF'
+                : mdAndUp
                   ? 'black'
                   : 'white',
-            }"
-            @click="navigateTo(item.to)"
-          >
-            {{ item.title }}</label
-          >
+          }" @click="navigateTo(item.to)">
+            {{ item.title }}</label>
         </template>
       </v-breadcrumbs>
     </template>
@@ -28,23 +20,30 @@
     <template #default>
       <nuxt-layout name="tab-page" :items="projectTabItems">
         <template #tab-content-profile>
+          <v-form class="signin-form-container" v-model="profileData.formValid" @submit.prevent="doSaveProfile">
+            <nuxt-layout name="tab-page-item">
+              <template #title>{{ $t("pages.developer.profile") }}</template>
+              <template #actions>
+                <v-btn prepend-icon="mdi-content-save" color="primary" text="Save" type="submit"
+                  :loading="profileData.isLoading"></v-btn>
+              </template>
+              <template #default>
+                <div class="tab-content-project-container mt-11">
+                  <AppTextField class="w-100 txf" :placeholder="$t('pages.developer.name')"
+                    :label="$t('pages.developer.name')" is-required />
+                </div>
+              </template>
+            </nuxt-layout>
+          </v-form>
           <nuxt-layout name="tab-page-item">
             <template #title>{{ $t("pages.developer.profile") }}</template>
             <template #actions>
-              <v-btn
-                prepend-icon="mdi-content-save"
-                color="primary"
-                text="Save"
-              ></v-btn>
+              <v-btn prepend-icon="mdi-content-save" color="primary" text="Save"></v-btn>
             </template>
             <template #default>
               <div class="tab-content-project-container mt-11">
-                <AppTextField
-                  class="w-100 txf"
-                  :placeholder="$t('pages.developer.name')"
-                  :label="$t('pages.developer.name')"
-                  is-required
-                />
+                <AppTextField class="w-100 txf" :placeholder="$t('pages.developer.name')"
+                  :label="$t('pages.developer.name')" is-required />
               </div>
             </template>
           </nuxt-layout>
@@ -58,30 +57,49 @@
               </ContainerRoundedSecondary>
             </template>
             <template #actions>
-              <v-btn prepend-icon="mdi-plus" color="primary" text="Add"></v-btn>
+              <v-btn prepend-icon="mdi-plus" color="primary" text="Add" @click="isDialogVisible = true"></v-btn>
+              <DialogCustom v-model="isDialogVisible" :title="'Add Developer'" @submit="handleDialogSubmit"
+                :loading="isLoading" :onClose="handleDialogClose">
+                <template #body>
+                  <v-form ref="form" v-model="valid">
+                    <label for="">Name Project<span class="text-red">*</span></label>
+                    <v-text-field :error-messages="errorMessages.nameProject" :rules="[rules.required]" v-model="formData.nameProject" label="Name"></v-text-field>
+
+                    <label for="">Type<span class="text-red">*</span></label>
+                    <v-select :error-messages="errorMessages.type" label="Type" v-model="formData.type"></v-select>
+
+                    <label for="">Zip Code <span class="text-red">*</span></label>
+                    <v-text-field :error-messages="errorMessages.zipCode" :rules="[rules.required]" label="Zip Code"
+                      v-model="formData.zipCode"></v-text-field>
+
+                    <label for="">Province <span class="text-red">*</span></label>
+                    <v-select :error-messages="errorMessages.province" label="Province" :rules="[rules.required]" v-model="formData.province"></v-select>
+
+                    <label for="">District <span class="text-red">*</span></label>
+                    <v-select :error-messages="errorMessages.district" label="District" :rules="[rules.required]" v-model="formData.district"></v-select>
+
+                    <label for="">Sub-District <span class="text-red">*</span></label>
+                    <v-select :error-messages="errorMessages.subDistrict" label="Sub-District" :rules="[rules.required]" v-model="formData.subDistrict"></v-select>
+
+                    <label for="">Address <span class="text-red">*</span></label>
+                    <v-textarea :error-messages="errorMessages.address" label="Address" :rules="[rules.required]" v-model="formData.address"></v-textarea>
+                  </v-form>
+
+                </template>
+              </DialogCustom>
             </template>
             <template #default>
               <div class="tab-content-project-container mt-11">
-                <Filter
-                  :options="[
-                    { title: 'A', value: '0' },
-                    { title: 'B', value: '1' },
-                    { title: 'C', value: '2' },
-                  ]"
-                />
+                <Filter :options="[
+                  { title: 'A', value: '0' },
+                  { title: 'B', value: '1' },
+                  { title: 'C', value: '2' },
+                ]" />
                 <div ref="resizableDiv" v-resize="onResize">
-                  <AppTable
-                    :items="projectItems"
-                    :headers="headers"
-                    :height="tableData.tableHeight"
-                  >
+                  <AppTable :items="projectItems" :headers="headers" :height="tableData.tableHeight">
                     <template #headers="{ columns }">
                       <tr>
-                        <th
-                          v-for="header in columns"
-                          :key="header.title"
-                          :style="{ fontWeight: 'bold' }"
-                        >
+                        <th v-for="header in columns" :key="header.title" :style="{ fontWeight: 'bold' }">
                           {{ header.title }}
                         </th>
                       </tr>
@@ -91,12 +109,8 @@
                       {{ index + 1 }}
                     </template>
                     <template #item.actions="{ item }">
-                      <v-btn
-                        density="comfortable"
-                        variant="plain"
-                        icon="mdi-magnify"
-                        @click="navigateTo(`${route.path}/${item.name}`)"
-                      ></v-btn>
+                      <v-btn density="comfortable" variant="plain" icon="mdi-magnify"
+                        @click="navigateTo(`${route.path}/${item.name}`)"></v-btn>
                     </template>
                   </AppTable>
                 </div>
@@ -110,8 +124,13 @@
 </template>
 
 <script lang="ts" setup>
+import { useBaseStore } from "@jaizen/base/app/stores/base.store";
+import { error } from "console";
+
+import DialogCustom from '~/utils/dialogCustom.vue';
 useHead({ title: "Developer" });
 
+const { doShowSnack, doHideSnack } = useBaseStore();
 const projectTabItems = [
   {
     text: "Profile",
@@ -447,6 +466,10 @@ const projectItems = [
   },
 ];
 
+const profileData = reactive({
+  formValid: false,
+  isLoading: false,
+});
 const route = useRoute();
 const pageName = computed(() => route.params.id?.toString() ?? "");
 
@@ -463,6 +486,16 @@ function onResize() {
     (mdAndUp.value ? 110 : 160);
 }
 
+function doSaveProfile() {
+  if (profileData.formValid) {
+    profileData.isLoading = true;
+
+    setTimeout(() => {
+      profileData.isLoading = false;
+      doShowSnack("Do save profile failure.", { type: "success" });
+    }, 1500);
+  }
+}
 const items = ref([
   {
     title: "Developer",
@@ -475,6 +508,71 @@ const items = ref([
     to: `/developer/${route.params.id}`,
   },
 ]);
+const isDialogVisible = ref(false);
+const isLoading = ref(false);
+const valid = ref(false);
+const formDefault = {
+  nameProject: "",
+  type: "",
+  zipCode: "",
+  province: "",
+  district: "",
+  subDistrict: "",
+  address: "",
+}
+const formData = ref(JSON.parse(JSON.stringify(formDefault)));
+// const formData = ref({ ...formDefault });
+const errorMessages = ref(JSON.parse(JSON.stringify(formDefault)));
+const rules = {
+
+required: (value: any) => !!value || "is required",
+// zipCode: (value: any) =>
+//   /^\d+$/.test(value) || 'รหัสไปรษณีย์ต้องเป็นตัวเลขเท่านั้น',
+}
+const clearFormData = () => {
+  formData.value = formDefault;
+  // formData.value = { ...formDefault };
+  errorMessages.value = { ...formDefault };
+}
+
+const validateField = (fieldName: string, value: any) => {
+  const ruleResult = rules.required(value);
+  return typeof ruleResult === "string" ? ruleResult : "";
+
+}
+
+const validateForm = () => {
+  let isValid = true;
+  Object.keys(formData.value).forEach((field) => {
+    const error = validateField(field, formData.value[field]);
+    errorMessages.value[field] = error;
+    if (error) isValid = false;
+  });
+  return isValid;
+};
+const handleDialogClose = () => {
+  console.log('Dialog closed');
+  clearFormData();
+};
+const handleDialogSubmit = () => {
+  console.log('Submitted Data:', formData.value)
+  isLoading.value = true
+  
+  if (validateForm()) {
+    alert("ส่งข้อมูลสำเร็จ!");
+    clearFormData();
+  } else {
+    isLoading.value = false;
+  }
+  // if (!valid.value) {
+  //   setTimeout(() => {
+  //     isLoading.value = false
+  //     isDialogVisible.value = false
+  //     clearFormData();
+  //   }, 1000)
+  // }
+
+}
 </script>
 
 <style lang="scss" scoped>
