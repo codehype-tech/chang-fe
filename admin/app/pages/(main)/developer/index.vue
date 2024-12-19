@@ -18,7 +18,11 @@
       >
       </v-btn>
       <div v-else>
-        <div style="background-color: white; border-radius: 4px" width="28px">
+        <div
+          style="background-color: white; border-radius: 4px"
+          width="28px"
+          @click="isDialogVisible = true"
+        >
           <v-icon color="primary">mdi-plus</v-icon>
         </div>
       </div>

@@ -119,6 +119,9 @@ import { useBaseStore } from "@jaizen/base/app/stores/base.store";
 const drawer = ref(false);
 const token = useCookie("token");
 const { mdAndUp } = useDisplay();
+
+drawer.value = mdAndUp.value;
+
 const { baseSnackData } = useBaseStore();
 export interface MainPageLayoutProps {
   isTitleDivider: boolean;
