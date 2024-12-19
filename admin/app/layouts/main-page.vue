@@ -101,17 +101,16 @@
 </template>
 
 <script lang="ts" setup>
-const drawer = ref(true);
+const drawer = ref(false);
 const token = useCookie("token");
 const { mdAndUp } = useDisplay();
+
+drawer.value = mdAndUp.value;
 
 export interface MainPageLayoutProps {
   isTitleDivider: boolean;
 }
 const props = defineProps<MainPageLayoutProps>();
-watch(mdAndUp, (newVal) => {
-  drawer.value = newVal;
-});
 
 function onDrawerClick() {
   drawer.value = !drawer.value;

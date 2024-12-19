@@ -4,14 +4,20 @@
     style="flex-direction: column"
   >
     <v-app-bar color="primary">
-      <v-app-bar-nav-icon
-        variant="text"
-        @click.stop="emits('drawerClick')"
-      ></v-app-bar-nav-icon>
-        
-      <label class="l-page-title">
-        <slot name="title.label"></slot>
-      </label>
+      <div class="mobile-appbar-style pr-4">
+        <v-app-bar-nav-icon
+          variant="text"
+          @click.stop="emits('drawerClick')"
+        ></v-app-bar-nav-icon>
+        <v-col cols="auto">
+          <v-toolbar-title>
+            <label class="l-page-title">
+              <slot name="title.label"></slot>
+            </label>
+          </v-toolbar-title>
+        </v-col>
+        <slot name="title.action"></slot>
+      </div>
     </v-app-bar>
 
     <div class="mobile-content">
@@ -42,5 +48,13 @@ const emits = defineEmits<{
   flex-direction: column;
   gap: 16px;
   height: 100% !important;
+}
+
+.mobile-appbar-style {
+  width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center;
 }
 </style>

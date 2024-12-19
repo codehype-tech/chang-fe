@@ -7,6 +7,7 @@
 
     <template #title.action>
       <v-btn
+        v-if="mdAndUp"
         color="primary"
         style="color: white"
         base-color="primary"
@@ -15,6 +16,11 @@
         text="Add"
       >
       </v-btn>
+      <div v-else>
+        <div style="background-color: white; border-radius: 4px" width="28px">
+          <v-icon color="primary">mdi-plus</v-icon>
+        </div>
+      </div>
     </template>
 
     <template #header-actions>
